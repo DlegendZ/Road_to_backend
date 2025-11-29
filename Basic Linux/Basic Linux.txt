@@ -1,0 +1,23 @@
+Summary
+
+Basic Commands
+
+ls: list files and folders
+
+cd: move between directories
+
+pwd: show current directory
+
+cat: display file content
+
+grep: search text inside files
+
+find: search for files/folders in the system
+
+Permission & Process Management
+
+chmod: change file/folder permissions (read/write/execute)
+
+ps: view running processes
+
+kill: stop a process using its PID (use kill -9 to force stop)
