@@ -1,13 +1,12 @@
-// db.js
 import pg from "pg";
 import dotenv from "dotenv";
 
-dotenv.config(); // <-- loads .env
+dotenv.config();
 
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // <-- read from .env
+  connectionString: process.env.DATABASE_URL, 
 });
 
 export const query = (text, params) => pool.query(text, params);
