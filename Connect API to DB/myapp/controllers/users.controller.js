@@ -24,7 +24,7 @@ export const getUserOnIdController = async(req, res) => {
         const result = await getUserOnIdModel(id);
 
         if (result.rows.length === 0) {
-            res.status(404).json({error : "User not found"});
+            return res.status(404).json({error : "User not found"});
         }
         res.status(200).json(result.rows[0]);
     }
@@ -37,6 +37,14 @@ export const getUserOnIdController = async(req, res) => {
 export const createUserController = async(req, res) => {
     try {
         const {name, email} = req.body;
+
+        if (!name || name.trim() === "") {
+            return res.status(400).json({error: "Name is required"});
+        }
+
+        if (!email || email.trim() === "") {
+            return res.status(400).json({error: "Email is required"});
+        }
 
         const result = await createUserModel(name, email);
         res.status(201).json(result.rows[0]);
@@ -52,10 +60,18 @@ export const updateUserController = async(req, res) => {
         const {id} = req.params;
         const {name, email} = req.body;
 
+        if (!name || name.trim() === "") {
+            return res.status(400).json({error: "Name is required"});
+        }
+
+        if (!email || email.trim() === "") {
+            return res.status(400).json({error: "Email is required"});
+        }
+
         const result = await updateUserModel(id, name, email);
 
         if (result.rows.length === 0) {
-            res.status(404).json({error : "User not found"});
+            return res.status(404).json({error : "User not found"});
         }
 
         res.status(200).json(result.rows[0]);
@@ -73,7 +89,7 @@ export const deleteUserController = async(req, res) => {
         const result = await deleteUserModel(id);
 
         if (result.rows.length === 0) {
-            res.status(404).json({error : "User not found"});
+            return res.status(404).json({error : "User not found"});
         }
         
         res.status(204).json(result.rows[0]);

@@ -18,11 +18,11 @@ export const createBookController= async(req, res) => {
     const { title, author } = req.body;
 
     if (!title || title.trim() === "") {
-        res.status(400).json({error: "Title is required"});
+        return res.status(400).json({error: "Title is required"});
     }
 
     if (!author || author.trim() === "") {
-        res.status(400).json({error: "Author is required"});
+        return res.status(400).json({error: "Author is required"});
     }
 
     try {
