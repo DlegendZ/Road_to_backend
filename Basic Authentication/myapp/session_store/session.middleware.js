@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { query } from "./db";
+import { query } from "./db.js";
 
 const SESSION_DAYS = 7;
 
