@@ -32,3 +32,4 @@ def update_user(user_id: int, user: dict):
 @app.delete("/users/{user_id}")
 def delete_user(user_id: int) :
     return {"deleted_id": user_id}
+
