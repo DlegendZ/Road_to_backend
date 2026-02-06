@@ -1,67 +1,50 @@
-# from sqlalchemy.orm import declarative_base
-# from sqlalchemy import Column, Integer, String, Boolean
+# from app.database import engine
+# from app.models import Base
 
-# base = declarative_base()
+# Base.metadata.create_all(bind=engine)
 
-# class user(base):
-#     __tablename__ = "users"
+from app.database import engine, SessionLocal
+from app.models import Base, User
 
-#     id = Column(Integer, primary_key=True, index=True)
-#     email = Column(String, unique=True, nullable=False)
-#     name = Column(String, nullable=False)
-#     is_active = Column(Boolean, default=True)
+Base.metadata.create_all(bind=engine)
 
-# user = user(
-#     email="a@test.com",
-#     name="Alice"
-# )
+# session = SessionLocal()
 
-# from sqlalchemy import Column, Integer, String, ForeignKey
-# from sqlalchemy.orm import relationship, declarative_base
+# user1 = User(name="Boss", email="boss@gmail.com")
 
-# base = declarative_base()
+# session.add(user1)
+# session.commit()
+# session.close()
 
-# class User(base):
-#     __tablename__ = "users"
+# session = SessionLocal()
 
-#     id = Column(Integer, primary_key=True)
-#     email = Column(String, unique=True, nullable=False)
+# users = session.query(User).all()
 
-#     # tasks = relationship()
+# for user in users:
+#     print(user.id, user.name, user.email)
 
-# class Task(Base):
-#     __tablename__ = "tasks"
-#     id = Column(Integer, primary_key=True)
-#     title = Column(String, nullable=False)
+# session.close()
 
-#     user_id = Column(Integer, ForeignKey("users.id"))
-    
-#     user = relationship("User", back_populates="tasks")
+# session = SessionLocal()
 
-# from sqlalchemy import Table, Column, Integer, ForeignKey
-# from sqlalchemy.orm import declarative_base, relationship
+# user = session.query(User).filter(User.name == "Boss").first()
+# print(user.email)
 
-# Base = declarative_base()
+# session.close()
 
-# task_assignments = Table(
-#     "task_assignments",
-#     Base.metadata,
-#     Column("user_id", ForeignKey("users.id"),  primary_key=True),
-#     Column("task_id", ForeignKey("tasks.id"), primary_key=True),
-# )
+# session = SessionLocal()
 
-# class User(Base):
-#     __tablename__ = "users"
+# user = session.query(User).filter(User.name == "Boss").first()
+# user.email = "newboss@mail.com"
 
-#     id = Column(Integer, primary_key=True)
+# session.commit()
+# session.close()
 
-#     tasks = relationship("Task", secondary=task_assignments, back_populates="users")
+# session = SessionLocal()
 
-# class Task(Base):
-#     __tablename__ = "tasks"
+# user = session.query(User).filter(User.name == "Boss").filter()
+# session.delete(user)
 
-#     id = Column(Integer, primary_key=True)
-
-#     users = relationship("User", secondary=task_assignments, back_populates="tasks")
-
+# session.commit()
+# session.close()
 
