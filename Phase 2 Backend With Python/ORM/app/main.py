@@ -1,50 +1,26 @@
-# from app.database import engine
-# from app.models import Base
+from app.models import User
+from app.database import SessionLocal
 
-# Base.metadata.create_all(bind=engine)
-
-from app.database import engine, SessionLocal
-from app.models import Base, User
-
-Base.metadata.create_all(bind=engine)
-
-# session = SessionLocal()
+session = SessionLocal()
 
 # user1 = User(name="Boss", email="boss@gmail.com")
-
 # session.add(user1)
 # session.commit()
 # session.close()
 
-# session = SessionLocal()
-
 # users = session.query(User).all()
-
 # for user in users:
 #     print(user.id, user.name, user.email)
 
 # session.close()
 
-# session = SessionLocal()
-
 # user = session.query(User).filter(User.name == "Boss").first()
-# print(user.email)
-
-# session.close()
-
-# session = SessionLocal()
-
-# user = session.query(User).filter(User.name == "Boss").first()
-# user.email = "newboss@mail.com"
+# user.email = "newboss@gmail.com"
 
 # session.commit()
 # session.close()
 
-# session = SessionLocal()
-
-# user = session.query(User).filter(User.name == "Boss").filter()
+# user = session.query(User).filter(User.name == "Boss").first()
 # session.delete(user)
-
 # session.commit()
 # session.close()
-
