@@ -28,14 +28,11 @@ def update_user(db:Session, user_id:int, user:schemas.user_update):
     return selected_user
 
 def delete_user(db:Session, user_id:int):
-    selected_user = db.query(models.User).first()
+    selected_user = db.query(models.User).filter(models.User.id == user_id).first()
 
-    deleted_user = {
-        "id": selected_user.id,
-        "name": selected_user.name,
-        "email": selected_user.email
-    }
+    if not selected_user:
+        return None
 
     db.delete(selected_user)
     db.commit()
-    return deleted_user
+    return selected_user
