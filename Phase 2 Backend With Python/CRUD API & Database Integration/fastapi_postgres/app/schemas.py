@@ -1,10 +1,14 @@
 from pydantic import BaseModel
 
-class UserCreate(BaseModel):
+class user_create(BaseModel):
     name:str
     email:str
 
-class UserResponse(UserCreate):
+class user_update(BaseModel):
+    name:str|None = None
+    email:str|None = None
+
+class user_response(user_create):
     id:int
 
     class config:

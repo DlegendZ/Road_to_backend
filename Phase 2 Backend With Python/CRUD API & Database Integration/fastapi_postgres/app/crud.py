@@ -1,17 +1,41 @@
+from app import models, schemas
 from sqlalchemy.orm import Session
-from app import schemas
-from app.models import User
 
-def create_user(db:Session, user: schemas.UserCreate):
-    db_user = User(
+def user_create(db:Session, user:schemas.user_create) :
+    new_user = models.User(
         name = user.name,
         email = user.email
     )
 
-    db.add(db_user)
+    db.add(new_user)
     db.commit()
-    db.refresh(db_user)
-    return db_user
+    db.refresh(new_user)
+    return new_user
 
-def get_users(db:Session) :
-    return db.query(User).all()
+def read_user(db:Session) :
+    return db.query(models.User).all()
+
+def read_user_by_id(db:Session, user_id:int):
+    return db.query(models.User).filter(models.User.id == user_id).first()
+
+def update_user(db:Session, user_id:int, user:schemas.user_update):
+    selected_user = db.query(models.User).filter(models.User.id == user_id).first()
+    selected_user.name = user.name
+    selected_user.email = user.email
+
+    db.commit()
+    db.refresh(selected_user)
+    return selected_user
+
+def delete_user(db:Session, user_id:int):
+    selected_user = db.query(models.User).first()
+
+    deleted_user = {
+        "id": selected_user.id,
+        "name": selected_user.name,
+        "email": selected_user.email
+    }
+
+    db.delete(selected_user)
+    db.commit()
+    return deleted_user
