@@ -1,8 +1,8 @@
-from repositories.user_repository import UserRepository
+from app.repositories.user_repository import UserRepository
 from sqlalchemy.orm import Session
 from app.schemas import user_create
 from fastapi import HTTPException
-from models import User
+from app.models import User
 
 class UserService:
     def __init__(self):
