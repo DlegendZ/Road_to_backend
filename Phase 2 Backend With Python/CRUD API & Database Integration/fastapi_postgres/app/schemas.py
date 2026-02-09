@@ -5,7 +5,11 @@ class user_base(BaseModel):
     email: EmailStr
 
 class user_create(user_base):
-    pass
+    password: str = Field(min_length=8)
+
+class user_login(BaseModel):
+    email: EmailStr
+    password: str
 
 class user_update(BaseModel):
     name: str|None = Field(default=None, min_length=3, max_length=50)
@@ -16,3 +20,7 @@ class user_response(user_base):
 
     class config:
         from_attributes = True
+
+class token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"

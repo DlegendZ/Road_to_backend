@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.schemas import user_create
 from fastapi import HTTPException
 from app.models import User
+from app.security import hash_password
 
 class UserService:
     def __init__(self):
@@ -17,7 +18,8 @@ class UserService:
 
         user = User(
             name = user_data.name,
-            email = user_data.email
+            email = user_data.email,
+            hashed_password = hash_password(user_data.password)
         )
 
         return self.repo.create(db, user)
